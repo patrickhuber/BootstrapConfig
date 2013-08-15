@@ -41,10 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DefaultBootstrapConfigurationProvider.cs" />
     <Compile Include="BootstrapMasterConfigurationSection.cs" />
     <Compile Include="BootstrapConfigurationSection.cs" />
+    <Compile Include="DefaultDirectorySearcher.cs" />
+    <Compile Include="ExePathResolver.cs" />
+    <Compile Include="FluentConfigurationLoader.cs" />
     <Compile Include="IBoostrapConfiguration.cs" />
     <Compile Include="IBoostrapMasterConfiguration.cs" />
+    <Compile Include="IBootstrapConfigurationProvider.cs" />
+    <Compile Include="IConfigurationLoader.cs" />
+    <Compile Include="IDirectorySearcher.cs" />
+    <Compile Include="IPathResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

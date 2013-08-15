@@ -146,6 +146,20 @@
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BootstrapConfig.Core\BootstrapConfig.Core.csproj">
+      <Project>{B0057C59-9A86-4524-A828-5DBA26892DF9}</Project>
+      <Name>BootstrapConfig.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BootstrapConfig.ServiceModel\BootstrapConfig.ServiceModel.csproj">
+      <Project>{22AEDBCC-7E8A-4CFA-9305-1724EF58F6FE}</Project>
+      <Name>BootstrapConfig.ServiceModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BootstrapConfig.Web\BootstrapConfig.Web.csproj">
+      <Project>{597D2E83-556B-429E-8FA3-43C22D88F1CD}</Project>
+      <Name>BootstrapConfig.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

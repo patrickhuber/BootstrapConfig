@@ -6,35 +6,61 @@ using System.Configuration;
 
 namespace BootstrapConfig
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class FluentConfigurationLoader : IConfigurationLoader
     {
         private IDictionary<string, Configuration> dictionary;
-        private IMasterDataConfigurationElement data;
+        private IPathResolver pathResolver;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FluentConfigurationLoader"/> class.
+        /// </summary>
         public FluentConfigurationLoader()
         {
             dictionary = new Dictionary<string, Configuration>();
         }
-        
+
+        /// <summary>
+        /// Loads the configuration dictionary.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="System.NotImplementedException"></exception>
         public IDictionary<string, System.Configuration.Configuration> LoadConfigurationDictionary()
         {
             throw new NotImplementedException();
         }
 
-        public FluentConfigurationLoader Data(Action<IMasterDataConfigurationElement> masterData)
+        /// <summary>
+        /// Pathes the resolver.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public FluentConfigurationLoader PathResolver<T>() where T : IPathResolver
         {
-            data = new FluentMasterDataConfigurationElement();
-            masterData(data);
-            return this;
+            return PathResolver(typeof(T));
         }
 
-        private class FluentMasterDataConfigurationElement : IMasterDataConfigurationElement
+        /// <summary>
+        /// Pathes the resolver.
+        /// </summary>
+        /// <param name="pathResolverType">Type of the path resolver.</param>
+        /// <returns></returns>
+        public FluentConfigurationLoader PathResolver(Type pathResolverType)
         {
-            public string Path { get; set; }
+            return PathResolver(Activator.CreateInstance(pathResolverType) as IPathResolver);
+        }
 
-            public string SearchPattern { get; set; }
-
-            public bool Recursive { get; set; }
+        /// <summary>
+        /// Pathes the resolver.
+        /// </summary>
+        /// <param name="pathResolver">The path resolver.</param>
+        /// <returns></returns>
+        public FluentConfigurationLoader PathResolver(IPathResolver pathResolver)
+        {
+            this.pathResolver = pathResolver;
+            return this;
         }
     }
 }
