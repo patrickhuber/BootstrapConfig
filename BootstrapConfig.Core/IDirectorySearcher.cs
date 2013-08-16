@@ -6,13 +6,15 @@ using System.Configuration;
 
 namespace BootstrapConfig
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IDirectorySearcher
     {
-        string Path { get; set; }
-        string SearchPattern { get; set; }
-        bool Recursive { get; set; }
-        IPathResolver PathResolver { get; }
-
+        /// <summary>
+        /// Gets the configuration dictionary.
+        /// </summary>
+        /// <returns></returns>
         IDictionary<string, Configuration> GetConfigurationDictionary();
     }
 }

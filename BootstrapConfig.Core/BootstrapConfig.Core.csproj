@@ -42,15 +42,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DefaultBootstrapConfigurationProvider.cs" />
-    <Compile Include="BootstrapMasterConfigurationSection.cs" />
+    <Compile Include="Diagnostics\Assert.cs" />
+    <Compile Include="DirectorySearcherConfigurationElement.cs" />
+    <Compile Include="TypeContainerConfigurationElement.cs" />
+    <Compile Include="RootBootstrapConfiguration.cs" />
+    <Compile Include="RootBootstrapConfigurationSection.cs" />
     <Compile Include="BootstrapConfigurationSection.cs" />
     <Compile Include="DefaultDirectorySearcher.cs" />
     <Compile Include="ExePathResolver.cs" />
-    <Compile Include="FluentConfigurationLoader.cs" />
-    <Compile Include="IBoostrapConfiguration.cs" />
-    <Compile Include="IBoostrapMasterConfiguration.cs" />
+    <Compile Include="RootBootstrapConfigurationBuilder.cs" />
+    <Compile Include="IBootstrapConfiguration.cs" />
     <Compile Include="IBootstrapConfigurationProvider.cs" />
-    <Compile Include="IConfigurationLoader.cs" />
+    <Compile Include="IRootBootstrapConfiguration.cs" />
     <Compile Include="IDirectorySearcher.cs" />
     <Compile Include="IPathResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

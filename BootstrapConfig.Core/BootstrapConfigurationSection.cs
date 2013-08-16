@@ -9,7 +9,7 @@ namespace BootstrapConfig
     /// <summary>
     /// defines the client config bootstrap configuration sections
     /// </summary>
-    public sealed class BootstrapConfigurationSection : ConfigurationSection, IBoostrapConfiguration
+    public sealed class BootstrapConfigurationSection : ConfigurationSection, IBootstrapConfiguration
     {
         private const string KeyKey = "key";
 

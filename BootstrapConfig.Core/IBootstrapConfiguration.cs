@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BootstrapConfig
 {
-    public interface IBoostrapMasterConfiguration
+    public interface IBootstrapConfiguration
     {
     }
 }

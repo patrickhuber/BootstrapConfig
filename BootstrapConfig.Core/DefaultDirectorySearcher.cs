@@ -8,15 +8,15 @@ using System.Diagnostics;
 
 namespace BootstrapConfig
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class DefaultDirectorySearcher : IDirectorySearcher
     {
-        public IPathResolver PathResolver { get; set; }
-
-        public string Path { get; set; }
-
-        public string SearchPattern { get; set; }
-
-        public bool Recursive { get; set; }
+        public string Path{get;set;}
+        public string SearchPattern{get;set;}
+        public bool Recursive{get;set;}
+        public IPathResolver PathResolver{get;set;}
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultDirectorySearcher"/> class.
@@ -25,24 +25,24 @@ namespace BootstrapConfig
         /// <param name="pattern">The pattern.</param>
         /// <param name="recursive">if set to <c>true</c> [recursive].</param>
         /// <param name="pathResolver">The path resolver.</param>
-        public DefaultDirectorySearcher(string path, string pattern, bool recursive, IPathResolver pathResolver)
+        public DefaultDirectorySearcher(string path, string searchPattern, bool recursive, IPathResolver pathResolver)
         {
-            this.Path = path ?? "App_Config";
-            this.SearchPattern = pattern ?? "*.config";
-            this.Recursive = recursive;
-            this.PathResolver = pathResolver;
+            Path = path;
+            SearchPattern = searchPattern;
+            Recursive = recursive;
+            PathResolver = pathResolver;
         }
 
         /// <summary>
         /// Gets the configuration list.
         /// </summary>
         /// <returns></returns>
-        public IDictionary<string, Configuration> GetConfigurationDictionary()
+        public virtual IDictionary<string, Configuration> GetConfigurationDictionary()
         {
-            string rootPath = PathResolver.ResolvePath(this.Path);
+            string rootPath = this.PathResolver.ResolvePath(this.Path);
             var files = Directory.EnumerateFiles(
-                rootPath, 
-                SearchPattern, 
+                rootPath,
+                this.SearchPattern,
                 this.Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
 
             var configurationDictionary = new Dictionary<string, Configuration>();
@@ -50,31 +50,60 @@ namespace BootstrapConfig
             // iterate over the files returning each configuration that passes as it is found
             foreach (var file in files)
             {
-                var configurationFileMap = new ExeConfigurationFileMap();
-                configurationFileMap.ExeConfigFilename = file;
-                
-                var configuration = ConfigurationManager.OpenMappedExeConfiguration(
-                    configurationFileMap, 
-                    ConfigurationUserLevel.None);
-
-                // iterate over the configuration sections searching for the bootstrap configuration section
-                foreach (var section in configuration.Sections)
-                {
-                    var bootstrapConfiguration = section as BootstrapConfigurationSection;
-                    if (bootstrapConfiguration != null)
-                    {
-                        string key = bootstrapConfiguration.Key;
-                        if (!string.IsNullOrWhiteSpace(key))
-                        {                            
-                            configurationDictionary.Add(key, configuration);
-                            break;
-                        }
-                        // todo: tracewarning 
-                    }
-                }
+                var keyAndConfiguration = ProcessFile(file);
+                if (keyAndConfiguration.HasValue)
+                    configurationDictionary.Add(
+                        keyAndConfiguration.Value.Key, 
+                        keyAndConfiguration.Value.Value);
             }
 
             return configurationDictionary;
+        }
+
+        /// <summary>
+        /// Processes the file.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <returns>null if no configuration found</returns>
+        protected virtual KeyValuePair<string, Configuration>? ProcessFile(string file)
+        {
+            var configurationFileMap = new ExeConfigurationFileMap();
+            configurationFileMap.ExeConfigFilename = file;
+
+            var configuration = ConfigurationManager.OpenMappedExeConfiguration(
+                configurationFileMap,
+                ConfigurationUserLevel.None);
+                        
+            // iterate over the configuration sections searching for the bootstrap configuration section
+            foreach (var section in configuration.Sections)
+            {
+                var keyAndConfiguration = ProcessSection(section as ConfigurationSection, configuration);
+                if (keyAndConfiguration.HasValue)
+                    return keyAndConfiguration;
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Processes the section.
+        /// </summary>
+        /// <param name="section">The section.</param>
+        /// <param name="configuration">The configuration.</param>
+        /// <returns></returns>
+        protected virtual KeyValuePair<string, Configuration>? ProcessSection(ConfigurationSection section, Configuration configuration)
+        {
+            var bootstrapConfiguration = section as BootstrapConfigurationSection;
+            if (bootstrapConfiguration != null)
+            {
+                string key = bootstrapConfiguration.Key;
+                if (!string.IsNullOrWhiteSpace(key))
+                {
+                    return new KeyValuePair<string, Configuration>(key, configuration);
+                }
+                // todo: tracewarning 
+            }
+            return null;
         }
     }
 }

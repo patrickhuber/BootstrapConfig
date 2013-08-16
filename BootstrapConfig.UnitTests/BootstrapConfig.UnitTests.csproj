@@ -50,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="FluentConfigurationLoaderTests.cs" />
+    <Compile Include="RootBootstrapConfigurationBuilderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

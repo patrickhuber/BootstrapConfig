@@ -13,13 +13,16 @@ namespace BootstrapConfig
     {
         private readonly IDictionary<string, Configuration> configurationDictionary;
 
+        private IRootBootstrapConfiguration rootBootstrapConfiguration;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultBootstrapConfigurationProvider"/> class.
         /// </summary>
         /// <param name="configurationLoader">The configuration loader.</param>
-        public DefaultBootstrapConfigurationProvider(IConfigurationLoader configurationLoader)
+        public DefaultBootstrapConfigurationProvider(IRootBootstrapConfiguration rootBootstrapConfiguration)
         {
-            this.configurationDictionary = configurationLoader.LoadConfigurationDictionary();        
+            this.rootBootstrapConfiguration = rootBootstrapConfiguration;
+            this.configurationDictionary = new Dictionary<string, Configuration>();
         }
 
         /// <summary>
