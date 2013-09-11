@@ -47,10 +47,9 @@ namespace BootstrapConfig
         public RootBootstrapConfigurationBuilder PathResolver(Type resolverType)
         {
             Assert.IsNotNull(resolverType, "resolverType", "parmeter resolverType must have a value.");
-            Assert.ArgumentIsTrue(resolverType.IsClass, "parameter resolverType must be a class type that derives from IResolverType.");
-
+            Assert.ArgumentIsTrue(typeof(IPathResolver).IsAssignableFrom(resolverType), "resolverType must implement IPathResolver");
             var pathResolver = Activator.CreateInstance(resolverType) as IPathResolver;
-            Assert.IsNotNull(pathResolver, "resolverType", "resolverType must be an instance of IResolverType.");
+            
             return PathResolver(pathResolver);
         }
 

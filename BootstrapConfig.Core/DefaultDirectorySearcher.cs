@@ -88,12 +88,12 @@ namespace BootstrapConfig
         /// <summary>
         /// Processes the section.
         /// </summary>
-        /// <param name="section">The section.</param>
+        /// <param name="sectconfigurationSectionion">The section.</param>
         /// <param name="configuration">The configuration.</param>
         /// <returns></returns>
-        protected virtual KeyValuePair<string, Configuration>? ProcessSection(ConfigurationSection section, Configuration configuration)
+        protected virtual KeyValuePair<string, Configuration>? ProcessSection(ConfigurationSection sectconfigurationSectionion, Configuration configuration)
         {
-            var bootstrapConfiguration = section as BootstrapConfigurationSection;
+            var bootstrapConfiguration = sectconfigurationSectionion as BootstrapConfigurationSection;
             if (bootstrapConfiguration != null)
             {
                 string key = bootstrapConfiguration.Key;

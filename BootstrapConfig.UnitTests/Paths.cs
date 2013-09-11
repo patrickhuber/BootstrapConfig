@@ -31,7 +31,7 @@ namespace BootstrapConfig.UnitTests
 
             public static class HasOneFile
             {
-                public const string Path = "HasOneFile";
+                public const string Path = App_Config.Path + Seperator + "HasOneFile";
                 public const string HasSectionAndKey = Path + Seperator + "HasSectionAndKey.config";
                 public const string HasSectionNoKey = Path + Seperator + "HasSectionNoKey.config";
                 public const string NoSectionNoKey = Path + Seperator + "NoSectionNoKey.config";
@@ -39,7 +39,7 @@ namespace BootstrapConfig.UnitTests
 
             public static class HasTransforms
             {
-                public const string Path = "HasTransforms";
+                public const string Path = App_Config.Path + Seperator + "HasTransforms";
                 public const string ConfigTransforms = Path + Seperator + "ConfigTransforms.config";
                 public const string ConfigTransformsDebug = Path + Seperator + "ConfigTransforms.Debug.config";
                 public const string ConfigTransformsRelease = Path + Seperator + "ConfigTransforms.Release.config";

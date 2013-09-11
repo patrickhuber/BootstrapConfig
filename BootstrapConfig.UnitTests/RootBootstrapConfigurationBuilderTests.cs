@@ -5,31 +5,13 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.IO;
+using BootstrapConfig.UnitTests.Templates;
 
 namespace BootstrapConfig.UnitTests
 {
     [TestClass]
-    public class RootBootstrapConfigurationBuilderTests
+    public class RootBootstrapConfigurationBuilderTests : TestContextTest
     {
-        #region TestContext
-        private TestContext testContextInstance;
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
-        #endregion TestContext
-
         private RootBootstrapConfigurationBuilder builder;
         private Mock<IPathResolver> mockPathResolver;
 
@@ -48,20 +30,20 @@ namespace BootstrapConfig.UnitTests
         }
 
         [TestMethod]
-        public void PathResolver_Should_Take_Instance()
+        public void Test_RootBootstrapConfigurationBuilder_PathResolver_Takes_Instance()
         {
             builder.PathResolver(mockPathResolver.Object);
         }
 
         [TestMethod]
-        public void PathResolver_Should_Take_Generic_Type()
+        public void Test_RootBootstrapConfigurationBuilder_PathResolver_Takes_Generic_Type()
         {
             builder.PathResolver<ExePathResolver>();
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void PathResolver_Should_Throw_ArgumentNullException_On_Non_IPathResolver_Type()
+        [ExpectedException(typeof(ArgumentException))]
+        public void Test_RootBootstrapConfigurationBuilder_PathResolver_Throws_ArgumentException_On_Non_IPathResolver_Type()
         {
             builder.PathResolver(typeof(object));
             Assert.Fail();
@@ -69,20 +51,20 @@ namespace BootstrapConfig.UnitTests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void PathResolver_Should_Throw_ArgumentException_On_Non_Class_Type()
+        public void Test_RootBootstrapConfigurationBuilder_PathResolver_Throws_ArgumentException_On_Non_Class_Type()
         {
             builder.PathResolver(typeof(string));
             Assert.Fail();
         }
 
         [TestMethod]
-        public void PathResolver_Should_Take_Type()
+        public void Test_RootBootstrapConfigurationBuilder_PathResolver_Takes_Type()
         {
             builder.PathResolver(typeof(ExePathResolver));
         }
 
         [TestMethod]
-        public void LoadConfigurationDirectory_Should_Create_Valid_Root_Configuration()
+        public void Test_RootBootstrapConfigurationBuilder_PathResolver_LoadConfigurationDirectory_Creates_Valid_Root_Configuration()
         {
             var result = builder
                 .PathResolver(mockPathResolver.Object)

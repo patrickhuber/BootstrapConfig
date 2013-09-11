@@ -43,7 +43,12 @@
   <ItemGroup>
     <Compile Include="DefaultBootstrapConfigurationProvider.cs" />
     <Compile Include="Diagnostics\Assert.cs" />
+    <Compile Include="DirectorySearcherArgs.cs" />
     <Compile Include="DirectorySearcherConfigurationElement.cs" />
+    <Compile Include="IIncludeConfigurationRule.cs" />
+    <Compile Include="ReadOnlyDictionary.cs" />
+    <Compile Include="Rules\BootstrapConfigurationSectionContainsKey.cs" />
+    <Compile Include="Rules\IsBoostrapConfigurationSectionRuleRule.cs" />
     <Compile Include="TypeContainerConfigurationElement.cs" />
     <Compile Include="RootBootstrapConfiguration.cs" />
     <Compile Include="RootBootstrapConfigurationSection.cs" />

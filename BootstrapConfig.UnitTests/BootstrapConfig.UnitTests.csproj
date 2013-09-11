@@ -52,26 +52,16 @@
     <Compile Include="DirectorySearcherTests.cs" />
     <Compile Include="Paths.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReadOnlyDictionaryTests.cs" />
     <Compile Include="RootBootstrapConfigurationBuilderTests.cs" />
+    <Compile Include="Templates\TestContextTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="App_Config\HasNestedFiles\HasSectionAndKey.config">
+    <None Include="App_Config\HasNestedFiles\top-level.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="App_Config\HasNestedFiles\HasSectionNoKey.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\HasNestedFiles\Nested\HasSectionAndKey.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\HasNestedFiles\Nested\HasSectionNoKey.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\HasNestedFiles\Nested\NoSectionNoKey.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\HasNestedFiles\NoSectionNoKey.config">
+    <None Include="App_Config\HasNestedFiles\Nested\nested.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="App_Config\HasOneFile\NoSectionNoKey.config">
@@ -85,7 +75,6 @@
     </None>
     <Content Include="App_Config\HasTransforms\ConfigTransforms.config" />
     <Content Include="App_Config\HasTransforms\ConfigTransforms.Debug.Config">
-      <DependentUpon>App_Config\HasTransforms\ConfigTransforms.config</DependentUpon>
     </Content>
     <Content Include="App_Config\HasTransforms\ConfigTransforms.Release.Config" />
     <None Include="packages.config" />

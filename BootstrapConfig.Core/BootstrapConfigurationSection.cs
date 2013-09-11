@@ -19,6 +19,7 @@ namespace BootstrapConfig
         /// <value>
         /// The key.
         /// </value>
+        [ConfigurationProperty(KeyKey)]
         public string Key
         { 
             get { return (string)this[KeyKey]; }
