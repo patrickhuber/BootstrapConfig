@@ -7,5 +7,6 @@ namespace BootstrapConfig
 {
     public interface IBootstrapConfiguration
     {
+        string Key { get; set; }
     }
 }

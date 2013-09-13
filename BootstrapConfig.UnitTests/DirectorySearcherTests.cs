@@ -17,10 +17,14 @@ namespace BootstrapConfig.UnitTests
     public class DirectorySearcherTests : TestContextTest
     {
         IPathResolver pathResolver;
+        IKeyGenerator keyGenerator;
+        IIncludeConfigurationRule isBootstrapConfigRule;
+        IIncludeConfigurationRule boostrapConfigHasKeyRule;
 
         [TestInitialize]
         public void Initialize_DirectorySearcherTests()
         {
+            // setup the path resolver
             var moqPathResolver = new Mock<IPathResolver>();
             moqPathResolver
                 .Setup(resolver => resolver.ResolvePath(It.IsAny<string>()))
@@ -28,6 +32,33 @@ namespace BootstrapConfig.UnitTests
                     Path.GetFullPath(
                         Path.Combine(this.CurrentDirectory.FullName, s)));
             pathResolver = moqPathResolver.Object;
+
+            // setup the key generator
+            var moqKeyGenerator = new Mock<IKeyGenerator>();
+            int index = 0;
+            moqKeyGenerator
+                .Setup(resolver=> resolver.Generate())
+                .Returns(()=>(index++).ToString());
+            keyGenerator = moqKeyGenerator.Object;
+
+            // setup the boostrap config rule
+            var moqIsBootstrapConfigRule = new Mock<IIncludeConfigurationRule>();
+            moqIsBootstrapConfigRule.Setup(resolver => resolver.Execute(It.IsAny<DirectorySearcherArgs>()))
+                .Returns<DirectorySearcherArgs>((ds) => 
+                {
+                    return ds.ConfigurationSection is BootstrapConfigurationSection;
+                });
+            isBootstrapConfigRule = moqIsBootstrapConfigRule.Object;
+
+            // setup the boostrap config has key rule
+            var moqBoostrapConfigHasKeyRule = new Mock<IIncludeConfigurationRule>();
+            moqIsBootstrapConfigRule.Setup(resolver => resolver.Execute(It.IsAny<DirectorySearcherArgs>()))
+                .Returns<DirectorySearcherArgs>((ds) =>
+                {
+                    var config = ds.ConfigurationSection as BootstrapConfigurationSection;
+                    return config != null && string.IsNullOrWhiteSpace(config.Key);
+                });
+            boostrapConfigHasKeyRule = moqBoostrapConfigHasKeyRule.Object;
         }
 
         [TestMethod]
@@ -36,8 +67,9 @@ namespace BootstrapConfig.UnitTests
             IDirectorySearcher directorySearcher = new DefaultDirectorySearcher(
                 Path.Combine(this.CurrentDirectory.FullName, Paths.App_Config.HasNestedFiles.Path),
                 "*.config",
-                true,
-                pathResolver);
+                true,                
+                pathResolver,
+                keyGenerator);
             var configurationDictionary = directorySearcher.GetConfigurationDictionary();
             Assert.AreEqual(2, configurationDictionary.Keys.Count);
         }
@@ -49,9 +81,26 @@ namespace BootstrapConfig.UnitTests
                 Path.Combine(this.CurrentDirectory.FullName, Paths.App_Config.HasOneFile.Path),
                 "*.config",
                 false,
-                pathResolver);
+                pathResolver,
+                keyGenerator,
+                isBootstrapConfigRule);
             var configurationDictionary = directorySearcher.GetConfigurationDictionary();
-            Assert.AreEqual(1, configurationDictionary.Keys.Count);
+            Assert.AreEqual(2, configurationDictionary.Keys.Count);
+        }
+
+        [TestMethod]
+        public void Test_DirectorySearcher_Loads_Only_Files_With_Configuration_And_Key()
+        {
+            IDirectorySearcher directorySearcher = new DefaultDirectorySearcher(
+                Path.Combine(this.CurrentDirectory.FullName, Paths.App_Config.HasOneFile.Path),
+                "*.config",
+                false,
+                pathResolver,
+                keyGenerator,
+                isBootstrapConfigRule,
+                boostrapConfigHasKeyRule);
+            var configurationDictionary = directorySearcher.GetConfigurationDictionary();
+            Assert.AreEqual(2, configurationDictionary.Keys.Count);
         }
 
         [TestMethod]
