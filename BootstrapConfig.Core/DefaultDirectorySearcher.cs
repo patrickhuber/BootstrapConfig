@@ -168,22 +168,19 @@ namespace BootstrapConfig
                 string key = bootstrapConfiguration.Key;
                 if (!string.IsNullOrWhiteSpace(key))
                 {
-                    return null;
+                    // loop over the rules. if a rule fails, return null.
+                    foreach (var rule in rules)
+                    {
+                        if (!rule.Execute(args))
+                            return null;
+                    }
+                    return new KeyValuePair<string, Configuration>(key, args.Configuration);
                 }
                 // todo: tracewarning 
-            }
-
-            // loop over the rules. if a rule fails, return null.
-            foreach (var rule in rules)
-            { 
-                if(!rule.Execute(args))
-                    return null;
-            }                        
+            }                
 
             // let the rules determine what the kick out condition is. For that reason we should allow any config section and use the key generator.
-            return new KeyValuePair<string, Configuration>(
-                keyGenerator.Generate(), 
-                args.Configuration);
+            return null;
         }
     }
 }

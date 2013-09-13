@@ -73,21 +73,7 @@ namespace BootstrapConfig.UnitTests
             var configurationDictionary = directorySearcher.GetConfigurationDictionary();
             Assert.AreEqual(2, configurationDictionary.Keys.Count);
         }
-
-        [TestMethod]
-        public void Test_DirectorySearcher_Loads_Only_Files_With_Configuration()
-        {
-            IDirectorySearcher directorySearcher = new DefaultDirectorySearcher(
-                Path.Combine(this.CurrentDirectory.FullName, Paths.App_Config.HasOneFile.Path),
-                "*.config",
-                false,
-                pathResolver,
-                keyGenerator,
-                isBootstrapConfigRule);
-            var configurationDictionary = directorySearcher.GetConfigurationDictionary();
-            Assert.AreEqual(2, configurationDictionary.Keys.Count);
-        }
-
+                
         [TestMethod]
         public void Test_DirectorySearcher_Loads_Only_Files_With_Configuration_And_Key()
         {
@@ -96,11 +82,9 @@ namespace BootstrapConfig.UnitTests
                 "*.config",
                 false,
                 pathResolver,
-                keyGenerator,
-                isBootstrapConfigRule,
-                boostrapConfigHasKeyRule);
+                keyGenerator);
             var configurationDictionary = directorySearcher.GetConfigurationDictionary();
-            Assert.AreEqual(2, configurationDictionary.Keys.Count);
+            Assert.AreEqual(1, configurationDictionary.Keys.Count);
         }
 
         [TestMethod]
