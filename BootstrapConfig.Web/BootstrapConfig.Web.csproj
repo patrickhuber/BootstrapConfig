@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VirtualPathResolver.cs" />
-    <Compile Include="WebConfigurationProvider.cs" />
+    <Compile Include="Abstractions\WebConfigurationProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BootstrapConfig.Core\BootstrapConfig.Core.csproj">

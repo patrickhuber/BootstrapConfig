@@ -42,11 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationVisitor.cs" />
-    <Compile Include="ApplicationConfigurationProvider.cs" />
+    <Compile Include="Abstractions\ApplicationConfigurationProvider.cs" />
     <Compile Include="ConfigurationAdapter.cs" />
     <Compile Include="ConfigurationSectionCollectionAdapter.cs" />
     <Compile Include="IConfiguration.cs" />
-    <Compile Include="IConfigurationProvider.cs" />
+    <Compile Include="Abstractions\IConfigurationProvider.cs" />
     <Compile Include="IConfigurationSection.cs" />
     <Compile Include="IConnectionStringSettingsCollection.cs" />
     <Compile Include="ConnectionStringSettingsCollectionAdapter.cs" />
