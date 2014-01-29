@@ -36,9 +36,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -55,12 +58,17 @@
   <ItemGroup>
     <Compile Include="Abstractions\ApplicationConfigurationProviderTests.cs" />
     <Compile Include="Abstractions\ConfigurationSectionAdapterTests.cs" />
+    <Compile Include="Learning\ConfigurationManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\BootstrapConfig.Core\BootstrapConfig.Core.csproj">
       <Project>{b0057c59-9a86-4524-a828-5dba26892df9}</Project>
       <Name>BootstrapConfig.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BootstrapConfig.Tests\BootstrapConfig.Tests.csproj">
+      <Project>{ce8575c6-8cd7-4b9d-a829-158b9f7a4fd6}</Project>
+      <Name>BootstrapConfig.Tests</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

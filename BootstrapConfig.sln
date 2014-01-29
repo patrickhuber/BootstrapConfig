@@ -40,6 +40,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BootstrapConfig.Tests.Unit"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BootstrapConfig.Tests.Integration", "Tests\BootstrapConfig.Tests.Integration\BootstrapConfig.Tests.Integration.csproj", "{ED2E9BD4-20AE-4CC9-87F3-04FFB1C01881}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BootstrapConfig.Tests", "Tests\BootstrapConfig.Tests\BootstrapConfig.Tests.csproj", "{CE8575C6-8CD7-4B9D-A829-158B9F7A4FD6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -140,6 +142,16 @@ Global
 		{ED2E9BD4-20AE-4CC9-87F3-04FFB1C01881}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{ED2E9BD4-20AE-4CC9-87F3-04FFB1C01881}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{ED2E9BD4-20AE-4CC9-87F3-04FFB1C01881}.Release|x86.ActiveCfg = Release|Any CPU
+		{CE8575C6-8CD7-4B9D-A829-158B9F7A4FD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE8575C6-8CD7-4B9D-A829-158B9F7A4FD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE8575C6-8CD7-4B9D-A829-158B9F7A4FD6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{CE8575C6-8CD7-4B9D-A829-158B9F7A4FD6}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{CE8575C6-8CD7-4B9D-A829-158B9F7A4FD6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CE8575C6-8CD7-4B9D-A829-158B9F7A4FD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE8575C6-8CD7-4B9D-A829-158B9F7A4FD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE8575C6-8CD7-4B9D-A829-158B9F7A4FD6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{CE8575C6-8CD7-4B9D-A829-158B9F7A4FD6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{CE8575C6-8CD7-4B9D-A829-158B9F7A4FD6}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -152,6 +164,7 @@ Global
 		{3E204652-43A2-4C86-8E41-B7D811A65871} = {64804107-ABF9-4EFA-81D6-B5C64C9FC72E}
 		{306B5F19-ECC2-48B4-9DE2-6B98240D56A6} = {A1F5AC2D-FACE-479F-B3F4-B188E2642CD1}
 		{ED2E9BD4-20AE-4CC9-87F3-04FFB1C01881} = {A1F5AC2D-FACE-479F-B3F4-B188E2642CD1}
+		{CE8575C6-8CD7-4B9D-A829-158B9F7A4FD6} = {A1F5AC2D-FACE-479F-B3F4-B188E2642CD1}
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = BootstrapConfig.vsmdi

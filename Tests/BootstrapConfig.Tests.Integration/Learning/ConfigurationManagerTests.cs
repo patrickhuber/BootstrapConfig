@@ -8,11 +8,12 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Xml;
 using System.Xml.Linq;
+using BootstrapConfig.Tests.Templates;
 
 namespace BootstrapConfig.Tests.Unit
 {
     [TestClass]
-    public class ConfigurationManagerTests : Templates.TestContextTest
+    public class ConfigurationManagerTests : TestContextTest
     {
         [TestMethod]
         public void Test_Changing_Config_Value_Persists()

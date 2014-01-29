@@ -5,7 +5,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.IO;
-using BootstrapConfig.Tests.Unit.Templates;
+using BootstrapConfig.Tests.Templates;
 
 namespace BootstrapConfig.Tests.Unit
 {

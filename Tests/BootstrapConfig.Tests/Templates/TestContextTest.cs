@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 
-namespace BootstrapConfig.Tests.Unit.Templates
+namespace BootstrapConfig.Tests.Templates
 {
     public class TestContextTest
     {
