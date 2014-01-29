@@ -1,6 +1,7 @@
 ﻿using BootstrapConfig.Abstractions;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Web.Configuration;
@@ -22,6 +23,11 @@ namespace BootstrapConfig.Web.Abstractions
         public IConnectionStringSettingsCollection ConnectionStrings
         {
             get { return new ConnectionStringSettingsCollectionAdapter(WebConfigurationManager.ConnectionStrings); }
+        }
+        
+        public IConfiguration OpenMappedConfiguration(string file)
+        {            
+            throw new NotImplementedException();
         }
     }
 }

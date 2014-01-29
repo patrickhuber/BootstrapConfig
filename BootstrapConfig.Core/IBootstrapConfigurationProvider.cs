@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Configuration;
+using BootstrapConfig.Abstractions;
 
 namespace BootstrapConfig
 {
@@ -16,12 +17,12 @@ namespace BootstrapConfig
         /// </summary>
         /// <param name="key">The key.</param>
         /// <returns></returns>
-        Configuration GetConfiguration(string key);
+        IConfiguration GetConfiguration(string key);
 
         /// <summary>
         /// Gets the configuration collection.
         /// </summary>
         /// <returns></returns>
-        IDictionary<string, Configuration> GetConfigurationCollection();
+        IDictionary<string, IConfiguration> GetConfigurationCollection();
     }
 }

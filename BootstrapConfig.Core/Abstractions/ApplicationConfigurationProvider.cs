@@ -29,5 +29,13 @@ namespace BootstrapConfig.Abstractions
         {
             get { return ConfigurationManager.AppSettings; }
         }
+
+        public IConfiguration OpenMappedConfiguration(string file)
+        {
+            ExeConfigurationFileMap exeMap = new ExeConfigurationFileMap();
+            exeMap.ExeConfigFilename = file;
+            var configuration = ConfigurationManager.OpenMappedExeConfiguration(exeMap, ConfigurationUserLevel.None);
+            return new ConfigurationAdapter(configuration);
+        }
     }
 }

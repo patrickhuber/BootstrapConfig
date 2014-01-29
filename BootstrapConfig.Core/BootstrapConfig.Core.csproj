@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstractions\ConfigurationSectionAdapter.cs" />
     <Compile Include="Abstractions\ConnectionStringSettingsAdapter.cs" />
     <Compile Include="Abstractions\IConfigurationSectionCollection.cs" />
     <Compile Include="Abstractions\IConnectionStringSettings.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="Abstractions\IConfigurationSection.cs" />
     <Compile Include="Abstractions\IConnectionStringSettingsCollection.cs" />
     <Compile Include="Abstractions\ConnectionStringSettingsCollectionAdapter.cs" />
+    <Compile Include="Configuration\BootstrapConfigurationSection.cs" />
     <Compile Include="DefaultBootstrapConfigurationProvider.cs" />
     <Compile Include="Diagnostics\Assert.cs" />
     <Compile Include="DirectorySearcherArgs.cs" />

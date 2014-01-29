@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Configuration;
+using BootstrapConfig.Abstractions;
 
 namespace BootstrapConfig
 {
@@ -14,25 +15,25 @@ namespace BootstrapConfig
         /// <summary>
         /// The dictionary
         /// </summary>
-        private IDictionary<string, Configuration> dictionary;
+        private IDictionary<string, IConfiguration> dictionary;
 
-        private Configuration configuration;
-        private ConfigurationSection configurationSection;
+        private IConfiguration configuration;
+        private IConfigurationSection configurationSection;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DirectorySearcherArgs"/> class.
         /// </summary>
         /// <param name="dictionary">The dictionary.</param>
         public DirectorySearcherArgs(
-            ConfigurationSection configurationSection,
-            Configuration configuration,
-            IDictionary<string, Configuration> dictionary)
+            IConfigurationSection configurationSection,
+            IConfiguration configuration,
+            IDictionary<string, IConfiguration> dictionary)
         {
             this.configuration = configuration;
             this.configurationSection = configurationSection;
 
             // lets protect our dictionary
-            this.dictionary = new ReadOnlyDictionary<string, Configuration>(dictionary);
+            this.dictionary = new ReadOnlyDictionary<string, IConfiguration>(dictionary);
         }
 
         /// <summary>
@@ -41,7 +42,7 @@ namespace BootstrapConfig
         /// <value>
         /// The dictionary.
         /// </value>
-        public IDictionary<string, Configuration> Dictionary 
+        public IDictionary<string, IConfiguration> Dictionary 
         {
             get { return this.dictionary; }
         }
@@ -52,7 +53,7 @@ namespace BootstrapConfig
         /// <value>
         /// The configuration section.
         /// </value>
-        public ConfigurationSection ConfigurationSection
+        public IConfigurationSection ConfigurationSection
         {
             get { return this.configurationSection; }
         }
@@ -63,7 +64,7 @@ namespace BootstrapConfig
         /// <value>
         /// The configuration.
         /// </value>
-        public Configuration Configuration 
+        public IConfiguration Configuration 
         {
             get { return this.configuration; }
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Configuration;
+using BootstrapConfig.Abstractions;
 
 namespace BootstrapConfig
 {
@@ -31,6 +32,6 @@ namespace BootstrapConfig
         /// Gets the configuration dictionary.
         /// </summary>
         /// <returns></returns>
-        IDictionary<string, Configuration> GetConfigurationDictionary();
+        IDictionary<string, IConfiguration> GetConfigurationDictionary();
     }
 }

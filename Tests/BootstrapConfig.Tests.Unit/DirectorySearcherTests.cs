@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using Moq;
 using BootstrapConfig.Tests.Unit.Templates;
+using BootstrapConfig.Abstractions;
 
 namespace BootstrapConfig.Tests.Unit
 {
@@ -16,6 +17,7 @@ namespace BootstrapConfig.Tests.Unit
     [TestClass]
     public class DirectorySearcherTests : TestContextTest
     {
+        IConfigurationProvider provider;
         IPathResolver pathResolver;
         IKeyGenerator keyGenerator;
         IIncludeConfigurationRule isBootstrapConfigRule;
@@ -24,6 +26,9 @@ namespace BootstrapConfig.Tests.Unit
         [TestInitialize]
         public void Initialize_DirectorySearcherTests()
         {
+            var moqConfigurationProvider = new Mock<IConfigurationProvider>();
+            provider = moqConfigurationProvider.Object;
+
             // setup the path resolver
             var moqPathResolver = new Mock<IPathResolver>();
             moqPathResolver
@@ -65,6 +70,7 @@ namespace BootstrapConfig.Tests.Unit
         public void Test_DirectorySearcher_Loads_Nested_Files()
         {
             IDirectorySearcher directorySearcher = new DefaultDirectorySearcher(
+                provider,
                 Path.Combine(this.CurrentDirectory.FullName, Paths.App_Config.HasNestedFiles.Path),
                 "*.config",
                 true,                
@@ -78,6 +84,7 @@ namespace BootstrapConfig.Tests.Unit
         public void Test_DirectorySearcher_Loads_Only_Files_With_Configuration_And_Key()
         {
             IDirectorySearcher directorySearcher = new DefaultDirectorySearcher(
+                provider,
                 Path.Combine(this.CurrentDirectory.FullName, Paths.App_Config.HasOneFile.Path),
                 "*.config",
                 false,

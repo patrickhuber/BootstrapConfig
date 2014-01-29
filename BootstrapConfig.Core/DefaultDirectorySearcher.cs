@@ -5,6 +5,7 @@ using System.Text;
 using System.IO;
 using System.Configuration;
 using System.Diagnostics;
+using BootstrapConfig.Abstractions;
 
 namespace BootstrapConfig
 {
@@ -13,6 +14,8 @@ namespace BootstrapConfig
     /// </summary>
     public class DefaultDirectorySearcher : IDirectorySearcher
     {
+        public IConfigurationProvider ConfigurationProvider { get; private set; }
+
         /// <summary>
         /// Gets or sets the path.
         /// </summary>
@@ -71,6 +74,7 @@ namespace BootstrapConfig
         /// <param name="keyGenerator">The key generator.</param>
         /// <param name="rules">The rules.</param>
         public DefaultDirectorySearcher(
+            IConfigurationProvider configurationProvider,
             string path, 
             string searchPattern, 
             bool recursive, 
@@ -78,6 +82,7 @@ namespace BootstrapConfig
             IKeyGenerator keyGenerator, 
             params IIncludeConfigurationRule[] rules)
         {
+            this.ConfigurationProvider = configurationProvider;
             this.Path = path;
             this.SearchPattern = searchPattern;
             this.Recursive = recursive;
@@ -90,7 +95,7 @@ namespace BootstrapConfig
         /// Gets the configuration list.
         /// </summary>
         /// <returns></returns>
-        public virtual IDictionary<string, Configuration> GetConfigurationDictionary()
+        public virtual IDictionary<string, IConfiguration> GetConfigurationDictionary()
         {
             // resolve the path using the built in path resolver
             string rootPath = this.PathResolver.ResolvePath(this.Path);
@@ -101,7 +106,7 @@ namespace BootstrapConfig
                 this.SearchPattern,
                 this.Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
 
-            IDictionary<string, Configuration> configurationDictionary = new Dictionary<string, Configuration>();
+            IDictionary<string, IConfiguration> configurationDictionary = new Dictionary<string, IConfiguration>();
             
             // iterate over the files returning each configuration that passes as it is found
             foreach (var file in files)
@@ -117,24 +122,19 @@ namespace BootstrapConfig
         /// </summary>
         /// <param name="file">The file.</param>
         /// <returns>null if no configuration found</returns>
-        protected virtual IDictionary<string, Configuration> ProcessFile(string file, IDictionary<string, Configuration> dictionary)
+        protected virtual IDictionary<string, IConfiguration> ProcessFile(string file, IDictionary<string, IConfiguration> dictionary)
         {
-            IDictionary<string, Configuration> workingDicionaryCopy = new Dictionary<string, Configuration>(dictionary);
-            var configurationFileMap = new ExeConfigurationFileMap();
-            configurationFileMap.ExeConfigFilename = file;
-
-            var configuration = ConfigurationManager.OpenMappedExeConfiguration(
-                configurationFileMap,
-                 ConfigurationUserLevel.None);
+            IDictionary<string, IConfiguration> workingDicionaryCopy = new Dictionary<string, IConfiguration>(dictionary);
+            var configuration = ConfigurationProvider.OpenMappedConfiguration(file);
 
             // iterate over the configuration sections use the rules to process the files
-            foreach (ConfigurationSection section in configuration.Sections)
+            foreach (IConfigurationSection section in configuration.Sections)
             {
                 var keyAndConfiguration = ProcessSection(
                     new DirectorySearcherArgs(
                         section, 
                         configuration,
-                        new ReadOnlyDictionary<string, Configuration>(workingDicionaryCopy)), 
+                        new ReadOnlyDictionary<string, IConfiguration>(workingDicionaryCopy)), 
                     this.KeyGenerator,
                     this.Rules);
 
@@ -156,7 +156,7 @@ namespace BootstrapConfig
         /// <param name="sectconfigurationSectionion">The section.</param>
         /// <param name="configuration">The configuration.</param>
         /// <returns></returns>
-        protected virtual KeyValuePair<string, Configuration>? ProcessSection(
+        protected virtual KeyValuePair<string, IConfiguration>? ProcessSection(
             DirectorySearcherArgs args,
             IKeyGenerator keyGenerator,
             IIncludeConfigurationRule[] rules)
@@ -174,7 +174,7 @@ namespace BootstrapConfig
                         if (!rule.Execute(args))
                             return null;
                     }
-                    return new KeyValuePair<string, Configuration>(key, args.Configuration);
+                    return new KeyValuePair<string, IConfiguration>(key, args.Configuration);
                 }
                 // todo: tracewarning 
             }                

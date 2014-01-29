@@ -7,5 +7,6 @@ namespace BootstrapConfig.Abstractions
 {
     public interface IConfiguration
     {
+        IConfigurationSectionCollection Sections { get; }
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BootstrapConfig.Abstractions
 {
-    public interface IConfigurationSectionCollection
+    public interface IConfigurationSectionCollection : IEnumerable<IConfigurationSection>
     {
     }
 }
