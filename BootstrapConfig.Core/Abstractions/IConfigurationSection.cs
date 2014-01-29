@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BootstrapConfig
+namespace BootstrapConfig.Abstractions
 {
-    public interface IConnectionStringSettingsCollection
+    public interface IConfigurationSection
     {
     }
 }

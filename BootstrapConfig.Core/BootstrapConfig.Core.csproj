@@ -43,13 +43,13 @@
   <ItemGroup>
     <Compile Include="ConfigurationVisitor.cs" />
     <Compile Include="Abstractions\ApplicationConfigurationProvider.cs" />
-    <Compile Include="ConfigurationAdapter.cs" />
-    <Compile Include="ConfigurationSectionCollectionAdapter.cs" />
-    <Compile Include="IConfiguration.cs" />
+    <Compile Include="Abstractions\ConfigurationAdapter.cs" />
+    <Compile Include="Abstractions\ConfigurationSectionCollectionAdapter.cs" />
+    <Compile Include="Abstractions\IConfiguration.cs" />
     <Compile Include="Abstractions\IConfigurationProvider.cs" />
-    <Compile Include="IConfigurationSection.cs" />
-    <Compile Include="IConnectionStringSettingsCollection.cs" />
-    <Compile Include="ConnectionStringSettingsCollectionAdapter.cs" />
+    <Compile Include="Abstractions\IConfigurationSection.cs" />
+    <Compile Include="Abstractions\IConnectionStringSettingsCollection.cs" />
+    <Compile Include="Abstractions\ConnectionStringSettingsCollectionAdapter.cs" />
     <Compile Include="DefaultBootstrapConfigurationProvider.cs" />
     <Compile Include="Diagnostics\Assert.cs" />
     <Compile Include="DirectorySearcherArgs.cs" />
