@@ -12,7 +12,7 @@ namespace BootstrapConfig
     /// <summary>
     /// 
     /// </summary>
-    public class DefaultDirectorySearcher : IDirectorySearcher
+    public class DirectorySearcher : IDirectorySearcher
     {
         /// <summary>
         /// Gets the configuration provider.
@@ -71,7 +71,15 @@ namespace BootstrapConfig
         public IKeyGenerator KeyGenerator { get; protected set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DefaultDirectorySearcher" /> class.
+        /// Gets or sets the file provider.
+        /// </summary>
+        /// <value>
+        /// The file provider.
+        /// </value>
+        public IFileProvider FileProvider { get; protected set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DirectorySearcher" /> class.
         /// </summary>
         /// <param name="path">The path.</param>
         /// <param name="searchPattern">The search pattern.</param>
@@ -79,13 +87,14 @@ namespace BootstrapConfig
         /// <param name="pathResolver">The path resolver.</param>
         /// <param name="keyGenerator">The key generator.</param>
         /// <param name="rules">The rules.</param>
-        public DefaultDirectorySearcher(
+        public DirectorySearcher(
             IConfigurationProvider configurationProvider,
-            string path, 
-            string searchPattern, 
-            bool recursive, 
             IPathResolver pathResolver, 
-            IKeyGenerator keyGenerator, 
+            IKeyGenerator keyGenerator,
+            IFileProvider fileProvider,
+            string path,
+            string searchPattern,
+            bool recursive, 
             params IIncludeConfigurationRule[] rules)
         {
             this.ConfigurationProvider = configurationProvider;
@@ -107,10 +116,10 @@ namespace BootstrapConfig
             string rootPath = this.PathResolver.ResolvePath(this.Path);
 
             // enumerators are a bit faster on startup and the same on processing time.
-            var files = Directory.EnumerateFiles(
+            var files = FileProvider.EnumerateFiles(
                 rootPath,
                 this.SearchPattern,
-                this.Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
+                this.Recursive);
 
             IDictionary<string, IConfiguration> configurationDictionary = new Dictionary<string, IConfiguration>();
             
@@ -128,10 +137,10 @@ namespace BootstrapConfig
         /// </summary>
         /// <param name="file">The file.</param>
         /// <returns>null if no configuration found</returns>
-        protected virtual IDictionary<string, IConfiguration> ProcessFile(string file, IDictionary<string, IConfiguration> dictionary)
+        protected virtual IDictionary<string, IConfiguration> ProcessFile(FileInfo file, IDictionary<string, IConfiguration> dictionary)
         {
             IDictionary<string, IConfiguration> workingDicionaryCopy = new Dictionary<string, IConfiguration>(dictionary);
-            var configuration = ConfigurationProvider.OpenMappedConfiguration(file);
+            var configuration = ConfigurationProvider.OpenMappedConfiguration(file.FullName);
 
             // iterate over the configuration sections use the rules to process the files
             foreach (IConfigurationSection section in configuration.Sections)
