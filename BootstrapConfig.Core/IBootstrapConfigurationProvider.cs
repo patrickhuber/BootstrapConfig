@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Configuration;
+using Cfg = System.Configuration;
 
 namespace BootstrapConfig
 {
@@ -16,12 +16,12 @@ namespace BootstrapConfig
         /// </summary>
         /// <param name="key">The key.</param>
         /// <returns></returns>
-        Configuration GetConfiguration(string key);
+        Cfg.Configuration GetConfiguration(string key);
 
         /// <summary>
         /// Gets the configuration collection.
         /// </summary>
         /// <returns></returns>
-        IDictionary<string, Configuration> GetConfigurationCollection();
+        IDictionary<string, Cfg.Configuration> GetConfigurationCollection();
     }
 }

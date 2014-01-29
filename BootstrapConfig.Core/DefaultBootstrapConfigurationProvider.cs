@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Configuration;
+using Cfg = System.Configuration;
 
 namespace BootstrapConfig
 {
@@ -11,7 +11,7 @@ namespace BootstrapConfig
     /// </summary>
     public class DefaultBootstrapConfigurationProvider : IBootstrapConfigurationProvider
     {
-        private readonly IDictionary<string, Configuration> configurationDictionary;
+        private readonly IDictionary<string, Cfg.Configuration> configurationDictionary;
 
         private IRootBootstrapConfiguration rootBootstrapConfiguration;
 
@@ -22,7 +22,7 @@ namespace BootstrapConfig
         public DefaultBootstrapConfigurationProvider(IRootBootstrapConfiguration rootBootstrapConfiguration)
         {
             this.rootBootstrapConfiguration = rootBootstrapConfiguration;
-            this.configurationDictionary = new Dictionary<string, Configuration>();
+            this.configurationDictionary = new Dictionary<string, Cfg.Configuration>();
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace BootstrapConfig
         /// </summary>
         /// <param name="key">The key.</param>
         /// <returns></returns>
-        public Configuration GetConfiguration(string key)
+        public Cfg.Configuration GetConfiguration(string key)
         {
             return configurationDictionary[key];
         }
@@ -39,9 +39,9 @@ namespace BootstrapConfig
         /// Gets the configuration collection.
         /// </summary>
         /// <returns></returns>
-        public IDictionary<string, Configuration> GetConfigurationCollection()
+        public IDictionary<string, Cfg.Configuration> GetConfigurationCollection()
         {
-            return new Dictionary<string, Configuration>(configurationDictionary);
+            return new Dictionary<string, Cfg.Configuration>(configurationDictionary);
         }
     }
 }
