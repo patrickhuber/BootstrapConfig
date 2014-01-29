@@ -13,5 +13,10 @@ namespace BootstrapConfig.Abstractions
         {
             this.collection = settingsCollection;
         }
+
+        public IConnectionStringSettings this[string name]
+        {
+            get { return new ConnectionStringSettingsAdapter(collection[name]); }
+        }
     }
 }

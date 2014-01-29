@@ -15,7 +15,7 @@ namespace BootstrapConfig.Abstractions
             this.configuration = configuration;            
         }
 
-        public IConnectionStringSettingsCollection Sections
+        public IConfigurationSectionCollection Sections
         {
             get { return new ConfigurationSectionCollectionAdapter(configuration.Sections); }
         }

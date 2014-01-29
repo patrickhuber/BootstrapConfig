@@ -5,8 +5,8 @@ using System.Text;
 
 namespace BootstrapConfig.Abstractions
 {
-    public interface IConnectionStringSettingsCollection
+    public interface IConnectionStringSettings
     {
-        IConnectionStringSettings this[string name] { get; }
+        string ConnectionString { get; }
     }
 }

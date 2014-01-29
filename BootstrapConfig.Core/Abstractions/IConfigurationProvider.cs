@@ -9,5 +9,6 @@ namespace BootstrapConfig.Abstractions
     public interface IConfigurationProvider
     {
         NameValueCollection AppSettings { get; }
+        IConnectionStringSettingsCollection ConnectionStrings { get; }
     }
 }

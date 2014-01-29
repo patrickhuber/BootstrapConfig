@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstractions\ConnectionStringSettingsAdapter.cs" />
+    <Compile Include="Abstractions\IConfigurationSectionCollection.cs" />
+    <Compile Include="Abstractions\IConnectionStringSettings.cs" />
     <Compile Include="ConfigurationVisitor.cs" />
     <Compile Include="Abstractions\ApplicationConfigurationProvider.cs" />
     <Compile Include="Abstractions\ConfigurationAdapter.cs" />

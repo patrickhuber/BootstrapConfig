@@ -6,7 +6,7 @@ using System.Text;
 
 namespace BootstrapConfig.Abstractions
 {
-    public class ConfigurationSectionCollectionAdapter : IConnectionStringSettingsCollection
+    public class ConfigurationSectionCollectionAdapter : IConfigurationSectionCollection
     {
         private ConfigurationSectionCollection configurationSectionCollection;
         public ConfigurationSectionCollectionAdapter(ConfigurationSectionCollection collection)

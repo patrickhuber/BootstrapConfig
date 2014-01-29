@@ -18,5 +18,10 @@ namespace BootstrapConfig.Web.Abstractions
         {
             get { return WebConfigurationManager.AppSettings; }
         }
+        
+        public IConnectionStringSettingsCollection ConnectionStrings
+        {
+            get { return new ConnectionStringSettingsCollectionAdapter(WebConfigurationManager.ConnectionStrings); }
+        }
     }
 }
