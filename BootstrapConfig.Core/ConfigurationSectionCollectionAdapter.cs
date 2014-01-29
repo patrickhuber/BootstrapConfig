@@ -4,9 +4,9 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 
-namespace BootstrapConfig.Configuration
+namespace BootstrapConfig
 {
-    public class ConfigurationSectionCollectionAdapter : IConfigurationSectionCollection
+    public class ConfigurationSectionCollectionAdapter : IConnectionStringSettingsCollection
     {
         private ConfigurationSectionCollection configurationSectionCollection;
         public ConfigurationSectionCollectionAdapter(ConfigurationSectionCollection collection)

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BootstrapConfig.Configuration
+namespace BootstrapConfig.Web
 {
-    public interface IConfiguration
+    class WebConfigurationProvider : IConfigurationProvider
     {
     }
 }

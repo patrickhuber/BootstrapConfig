@@ -42,10 +42,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationVisitor.cs" />
-    <Compile Include="Configuration\ConfigurationAdapter.cs" />
-    <Compile Include="Configuration\ConfigurationSectionCollectionAdapter.cs" />
-    <Compile Include="Configuration\IConfiguration.cs" />
-    <Compile Include="Configuration\IConfigurationSectionCollection.cs" />
+    <Compile Include="ApplicationConfigurationProvider.cs" />
+    <Compile Include="ConfigurationAdapter.cs" />
+    <Compile Include="ConfigurationSectionCollectionAdapter.cs" />
+    <Compile Include="IConfiguration.cs" />
+    <Compile Include="IConfigurationProvider.cs" />
+    <Compile Include="IConfigurationSection.cs" />
+    <Compile Include="IConnectionStringSettingsCollection.cs" />
+    <Compile Include="ConnectionStringSettingsCollectionAdapter.cs" />
     <Compile Include="DefaultBootstrapConfigurationProvider.cs" />
     <Compile Include="Diagnostics\Assert.cs" />
     <Compile Include="DirectorySearcherArgs.cs" />

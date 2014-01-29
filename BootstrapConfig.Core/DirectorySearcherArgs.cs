@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Cfg = System.Configuration;
+using System.Configuration;
 
 namespace BootstrapConfig
 {
@@ -14,25 +14,25 @@ namespace BootstrapConfig
         /// <summary>
         /// The dictionary
         /// </summary>
-        private IDictionary<string, Cfg.Configuration> dictionary;
+        private IDictionary<string, Configuration> dictionary;
 
-        private Cfg.Configuration configuration;
-        private Cfg.ConfigurationSection configurationSection;
+        private Configuration configuration;
+        private ConfigurationSection configurationSection;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DirectorySearcherArgs"/> class.
         /// </summary>
         /// <param name="dictionary">The dictionary.</param>
         public DirectorySearcherArgs(
-            Cfg.ConfigurationSection configurationSection,
-            Cfg.Configuration configuration,
-            IDictionary<string, Cfg.Configuration> dictionary)
+            ConfigurationSection configurationSection,
+            Configuration configuration,
+            IDictionary<string, Configuration> dictionary)
         {
             this.configuration = configuration;
             this.configurationSection = configurationSection;
 
             // lets protect our dictionary
-            this.dictionary = new ReadOnlyDictionary<string, Cfg.Configuration>(dictionary);
+            this.dictionary = new ReadOnlyDictionary<string, Configuration>(dictionary);
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace BootstrapConfig
         /// <value>
         /// The dictionary.
         /// </value>
-        public IDictionary<string, Cfg.Configuration> Dictionary 
+        public IDictionary<string, Configuration> Dictionary 
         {
             get { return this.dictionary; }
         }
@@ -52,7 +52,7 @@ namespace BootstrapConfig
         /// <value>
         /// The configuration section.
         /// </value>
-        public Cfg.ConfigurationSection ConfigurationSection
+        public ConfigurationSection ConfigurationSection
         {
             get { return this.configurationSection; }
         }
@@ -63,7 +63,7 @@ namespace BootstrapConfig
         /// <value>
         /// The configuration.
         /// </value>
-        public Cfg.Configuration Configuration 
+        public Configuration Configuration 
         {
             get { return this.configuration; }
         }

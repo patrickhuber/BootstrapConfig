@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-using Cfg = System.Configuration;
+using System.Configuration;
 using System.Diagnostics;
 
 namespace BootstrapConfig
@@ -90,7 +90,7 @@ namespace BootstrapConfig
         /// Gets the configuration list.
         /// </summary>
         /// <returns></returns>
-        public virtual IDictionary<string, Cfg.Configuration> GetConfigurationDictionary()
+        public virtual IDictionary<string, Configuration> GetConfigurationDictionary()
         {
             // resolve the path using the built in path resolver
             string rootPath = this.PathResolver.ResolvePath(this.Path);
@@ -101,7 +101,7 @@ namespace BootstrapConfig
                 this.SearchPattern,
                 this.Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
 
-            IDictionary<string, Cfg.Configuration> configurationDictionary = new Dictionary<string, Cfg.Configuration>();
+            IDictionary<string, Configuration> configurationDictionary = new Dictionary<string, Configuration>();
             
             // iterate over the files returning each configuration that passes as it is found
             foreach (var file in files)
@@ -117,24 +117,24 @@ namespace BootstrapConfig
         /// </summary>
         /// <param name="file">The file.</param>
         /// <returns>null if no configuration found</returns>
-        protected virtual IDictionary<string, Cfg.Configuration> ProcessFile(string file, IDictionary<string, Cfg.Configuration> dictionary)
+        protected virtual IDictionary<string, Configuration> ProcessFile(string file, IDictionary<string, Configuration> dictionary)
         {
-            IDictionary<string, Cfg.Configuration> workingDicionaryCopy = new Dictionary<string, Cfg.Configuration>(dictionary);
-            var configurationFileMap = new Cfg.ExeConfigurationFileMap();
+            IDictionary<string, Configuration> workingDicionaryCopy = new Dictionary<string, Configuration>(dictionary);
+            var configurationFileMap = new ExeConfigurationFileMap();
             configurationFileMap.ExeConfigFilename = file;
 
-            var configuration = Cfg.ConfigurationManager.OpenMappedExeConfiguration(
+            var configuration = ConfigurationManager.OpenMappedExeConfiguration(
                 configurationFileMap,
-                 Cfg.ConfigurationUserLevel.None);
+                 ConfigurationUserLevel.None);
 
             // iterate over the configuration sections use the rules to process the files
-            foreach (Cfg.ConfigurationSection section in configuration.Sections)
+            foreach (ConfigurationSection section in configuration.Sections)
             {
                 var keyAndConfiguration = ProcessSection(
                     new DirectorySearcherArgs(
                         section, 
                         configuration,
-                        new ReadOnlyDictionary<string, Cfg.Configuration>(workingDicionaryCopy)), 
+                        new ReadOnlyDictionary<string, Configuration>(workingDicionaryCopy)), 
                     this.KeyGenerator,
                     this.Rules);
 
@@ -156,7 +156,7 @@ namespace BootstrapConfig
         /// <param name="sectconfigurationSectionion">The section.</param>
         /// <param name="configuration">The configuration.</param>
         /// <returns></returns>
-        protected virtual KeyValuePair<string, Cfg.Configuration>? ProcessSection(
+        protected virtual KeyValuePair<string, Configuration>? ProcessSection(
             DirectorySearcherArgs args,
             IKeyGenerator keyGenerator,
             IIncludeConfigurationRule[] rules)
@@ -174,7 +174,7 @@ namespace BootstrapConfig
                         if (!rule.Execute(args))
                             return null;
                     }
-                    return new KeyValuePair<string, Cfg.Configuration>(key, args.Configuration);
+                    return new KeyValuePair<string, Configuration>(key, args.Configuration);
                 }
                 // todo: tracewarning 
             }                
