@@ -14,6 +14,12 @@ namespace BootstrapConfig
     /// </summary>
     public class DefaultDirectorySearcher : IDirectorySearcher
     {
+        /// <summary>
+        /// Gets the configuration provider.
+        /// </summary>
+        /// <value>
+        /// The configuration provider.
+        /// </value>
         public IConfigurationProvider ConfigurationProvider { get; private set; }
 
         /// <summary>
@@ -162,7 +168,7 @@ namespace BootstrapConfig
             IIncludeConfigurationRule[] rules)
         {
             // check if we have a valid configuration section
-            var bootstrapConfiguration = args.ConfigurationSection as BootstrapConfigurationSection;
+            var bootstrapConfiguration = args.ConfigurationSection as IBootstrapConfiguration;
             if (bootstrapConfiguration != null)
             {
                 string key = bootstrapConfiguration.Key;

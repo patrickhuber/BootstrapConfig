@@ -8,7 +8,7 @@ namespace BootstrapConfig.Abstractions
 {
     public class ConfigurationSectionAdapter : IConfigurationSection
     {
-        private ConfigurationSection configurationSection;
+        protected ConfigurationSection configurationSection;
 
         public ConfigurationSectionAdapter(ConfigurationSection configurationSection)
         {

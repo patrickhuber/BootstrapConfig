@@ -51,7 +51,7 @@ namespace BootstrapConfig.Tests.Unit
             moqIsBootstrapConfigRule.Setup(resolver => resolver.Execute(It.IsAny<DirectorySearcherArgs>()))
                 .Returns<DirectorySearcherArgs>((ds) => 
                 {
-                    return ds.ConfigurationSection is BootstrapConfigurationSection;
+                    return ds.ConfigurationSection is IBootstrapConfiguration;
                 });
             isBootstrapConfigRule = moqIsBootstrapConfigRule.Object;
 
@@ -60,7 +60,7 @@ namespace BootstrapConfig.Tests.Unit
             moqIsBootstrapConfigRule.Setup(resolver => resolver.Execute(It.IsAny<DirectorySearcherArgs>()))
                 .Returns<DirectorySearcherArgs>((ds) =>
                 {
-                    var config = ds.ConfigurationSection as BootstrapConfigurationSection;
+                    var config = ds.ConfigurationSection as IBootstrapConfiguration;
                     return config != null && string.IsNullOrWhiteSpace(config.Key);
                 });
             boostrapConfigHasKeyRule = moqBoostrapConfigHasKeyRule.Object;

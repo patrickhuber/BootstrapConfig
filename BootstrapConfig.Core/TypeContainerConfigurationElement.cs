@@ -6,7 +6,7 @@ using System.Configuration;
 
 namespace BootstrapConfig
 {
-    public class TypeContainerConfigurationElement : ConfigurationElement
+    public class TypeContainerConfigurationElement : ConfigurationElement, BootstrapConfig.ITypeContainerConfiguration
     {
         public const string TypeKey = "type";
 

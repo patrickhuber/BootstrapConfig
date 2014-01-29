@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Configuration;
 
-namespace BootstrapConfig
+namespace BootstrapConfig.Configuration
 {
     /// <summary>
     /// 
     /// </summary>
-    public class DirectorySearcherConfigurationElement : TypeContainerConfigurationElement
+    public class DirectorySearcherConfigurationElement : TypeContainerConfigurationElement, BootstrapConfig.Configuration.IDirectorySearcherConfiguration
     {
         private const string PathKey = "path";
         [ConfigurationProperty(PathKey)]

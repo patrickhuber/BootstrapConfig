@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Configuration;
+using BootstrapConfig.Configuration;
 
 namespace BootstrapConfig
 {
@@ -17,7 +18,7 @@ namespace BootstrapConfig
 
         private const string DirectorySearcherKey = "directorySearcher";
         [ConfigurationProperty(DirectorySearcherKey)]
-        public DirectorySearcherConfigurationElement DirectorySearcher 
+        public IDirectorySearcherConfiguration DirectorySearcher 
         {
             get { return this[DirectorySearcherKey] as DirectorySearcherConfigurationElement; }
             set { this[DirectorySearcherKey] = value; } 
