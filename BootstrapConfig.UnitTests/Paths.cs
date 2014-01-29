@@ -44,6 +44,12 @@ namespace BootstrapConfig.UnitTests
                 public const string ConfigTransformsDebug = Path + Seperator + "ConfigTransforms.Debug.config";
                 public const string ConfigTransformsRelease = Path + Seperator + "ConfigTransforms.Release.config";
             }
+
+            public static class HasWcf
+            {
+                public const string Path = App_Config.Path + Seperator + "HasWcf";
+                public const string Wcf = Path + Seperator + "Wcf.config";
+            }
         }
     }
 }
