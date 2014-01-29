@@ -5,9 +5,9 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using Moq;
-using BootstrapConfig.UnitTests.Templates;
+using BootstrapConfig.Tests.Unit.Templates;
 
-namespace BootstrapConfig.UnitTests
+namespace BootstrapConfig.Tests.Unit
 {
     /// <summary>
     /// Make sure local.testsettings depoyment tab has deployment enabled and 

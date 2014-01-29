@@ -42,6 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationVisitor.cs" />
+    <Compile Include="Configuration\ConfigurationAdapter.cs" />
+    <Compile Include="Configuration\ConfigurationSectionCollectionAdapter.cs" />
+    <Compile Include="Configuration\IConfiguration.cs" />
+    <Compile Include="Configuration\IConfigurationSectionCollection.cs" />
     <Compile Include="DefaultBootstrapConfigurationProvider.cs" />
     <Compile Include="Diagnostics\Assert.cs" />
     <Compile Include="DirectorySearcherArgs.cs" />

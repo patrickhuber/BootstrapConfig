@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace BootstrapConfig.UnitTests
+namespace BootstrapConfig.Tests.Unit
 {
     [TestClass]
     public class ReadOnlyDictionaryTests

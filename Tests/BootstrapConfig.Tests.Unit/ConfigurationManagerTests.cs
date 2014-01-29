@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace BootstrapConfig.UnitTests
+namespace BootstrapConfig.Tests.Unit
 {
     [TestClass]
     public class ConfigurationManagerTests : Templates.TestContextTest

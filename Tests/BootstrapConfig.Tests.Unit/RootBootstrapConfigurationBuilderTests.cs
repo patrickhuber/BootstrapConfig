@@ -5,9 +5,9 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.IO;
-using BootstrapConfig.UnitTests.Templates;
+using BootstrapConfig.Tests.Unit.Templates;
 
-namespace BootstrapConfig.UnitTests
+namespace BootstrapConfig.Tests.Unit
 {
     [TestClass]
     public class RootBootstrapConfigurationBuilderTests : TestContextTest

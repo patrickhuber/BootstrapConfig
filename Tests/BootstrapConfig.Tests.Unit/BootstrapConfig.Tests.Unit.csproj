@@ -9,8 +9,8 @@
     <ProjectGuid>{306B5F19-ECC2-48B4-9DE2-6B98240D56A6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BootstrapConfig.UnitTests</RootNamespace>
-    <AssemblyName>BootstrapConfig.UnitTests</AssemblyName>
+    <RootNamespace>BootstrapConfig.Tests.Unit</RootNamespace>
+    <AssemblyName>BootstrapConfig.Tests.Unit</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -86,7 +86,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BootstrapConfig.Core\BootstrapConfig.Core.csproj">
+    <ProjectReference Include="..\..\BootstrapConfig.Core\BootstrapConfig.Core.csproj">
       <Project>{B0057C59-9A86-4524-A828-5DBA26892DF9}</Project>
       <Name>BootstrapConfig.Core</Name>
     </ProjectReference>
