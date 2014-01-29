@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BootstrapConfig.Abstractions;
 using System.Configuration;
 
-namespace BootstrapConfig.Tests.Unit.Abstractions
+namespace BootstrapConfig.Tests.Integration.Abstractions
 {
     [TestClass]
     public class ApplicationConfigurationProviderTests

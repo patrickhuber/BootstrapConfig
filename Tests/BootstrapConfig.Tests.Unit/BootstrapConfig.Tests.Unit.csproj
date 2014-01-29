@@ -60,7 +60,6 @@
     <Compile Include="ReadOnlyDictionaryTests.cs" />
     <Compile Include="RootBootstrapConfigurationBuilderTests.cs" />
     <Compile Include="Templates\TestContextTest.cs" />
-    <Compile Include="Abstractions\ApplicationConfigurationProviderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
