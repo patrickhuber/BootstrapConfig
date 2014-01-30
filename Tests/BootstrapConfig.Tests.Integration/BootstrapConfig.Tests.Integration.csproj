@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Abstractions\ApplicationConfigurationProviderTests.cs" />
     <Compile Include="Abstractions\ConfigurationSectionAdapterTests.cs" />
+    <Compile Include="IO\FileSystemProviderTests.cs" />
     <Compile Include="Learning\ConfigurationManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -73,7 +74,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="App_Config\HasNestedFiles\Nested\nested.config" />
+    <None Include="App_Config\HasNestedFiles\top-level.config" />
+    <None Include="App_Config\HasOneFile\HasSectionAndKey.config" />
+    <None Include="App_Config\HasOneFile\HasSectionNoKey.config" />
+    <None Include="App_Config\HasOneFile\NoSectionNoKey.config" />
+    <None Include="App_Config\HasTransforms\ConfigTransforms.config" />
+    <None Include="App_Config\HasTransforms\ConfigTransforms.Debug.Config" />
+    <None Include="App_Config\HasTransforms\ConfigTransforms.Release.Config" />
+    <None Include="App_Config\HasWcf\Wcf.config" />
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
