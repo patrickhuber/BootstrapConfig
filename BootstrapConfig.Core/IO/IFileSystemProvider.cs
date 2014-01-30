@@ -6,8 +6,8 @@ using System.Text;
 
 namespace BootstrapConfig
 {
-    public interface IFileProvider
+    public interface IFileSystemProvider
     {
-        IEnumerable<FileInfo> EnumerateFiles(string path, string pattern, bool recursive);
+        IEnumerable<string> EnumerateFiles(string path, string pattern, bool recursive);
     }
 }

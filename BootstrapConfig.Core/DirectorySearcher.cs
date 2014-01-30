@@ -76,7 +76,7 @@ namespace BootstrapConfig
         /// <value>
         /// The file provider.
         /// </value>
-        public IFileProvider FileProvider { get; protected set; }
+        public IFileSystemProvider FileProvider { get; protected set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DirectorySearcher" /> class.
@@ -91,7 +91,7 @@ namespace BootstrapConfig
             IConfigurationProvider configurationProvider,
             IPathResolver pathResolver, 
             IKeyGenerator keyGenerator,
-            IFileProvider fileProvider,
+            IFileSystemProvider fileProvider,
             string path,
             string searchPattern,
             bool recursive, 
@@ -137,10 +137,10 @@ namespace BootstrapConfig
         /// </summary>
         /// <param name="file">The file.</param>
         /// <returns>null if no configuration found</returns>
-        protected virtual IDictionary<string, IConfiguration> ProcessFile(FileInfo file, IDictionary<string, IConfiguration> dictionary)
+        protected virtual IDictionary<string, IConfiguration> ProcessFile(string file, IDictionary<string, IConfiguration> dictionary)
         {
             IDictionary<string, IConfiguration> workingDicionaryCopy = new Dictionary<string, IConfiguration>(dictionary);
-            var configuration = ConfigurationProvider.OpenMappedConfiguration(file.FullName);
+            var configuration = ConfigurationProvider.OpenMappedConfiguration(file);
 
             // iterate over the configuration sections use the rules to process the files
             foreach (IConfigurationSection section in configuration.Sections)

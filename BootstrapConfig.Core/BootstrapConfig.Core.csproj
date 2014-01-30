@@ -60,7 +60,7 @@
     <Compile Include="Diagnostics\Assert.cs" />
     <Compile Include="DirectorySearcherArgs.cs" />
     <Compile Include="Configuration\DirectorySearcherConfigurationElement.cs" />
-    <Compile Include="FileInfoProvider.cs" />
+    <Compile Include="FileProvider.cs" />
     <Compile Include="IFileProvider.cs" />
     <Compile Include="IIncludeConfigurationRule.cs" />
     <Compile Include="IKeyGenerator.cs" />

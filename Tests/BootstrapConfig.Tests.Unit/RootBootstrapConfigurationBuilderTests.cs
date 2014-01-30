@@ -68,7 +68,7 @@ namespace BootstrapConfig.Tests.Unit
         {
             var result = builder
                 .PathResolver(mockPathResolver.Object)
-                .DirectorySearcher<DefaultDirectorySearcher>(
+                .DirectorySearcher<DirectorySearcher>(
                     "App_Config",
                     "*.config",
                     true)

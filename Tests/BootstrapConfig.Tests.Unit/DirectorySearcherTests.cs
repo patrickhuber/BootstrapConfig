@@ -22,14 +22,26 @@ namespace BootstrapConfig.Tests.Unit
         IKeyGenerator keyGenerator;
         IIncludeConfigurationRule isBootstrapConfigRule;
         IIncludeConfigurationRule boostrapConfigHasKeyRule;
+        IFileSystemProvider fileProvider;
 
         [TestInitialize]
         public void Initialize_DirectorySearcherTests()
         {
+            CreateMockConfigurationProvider();
+            CreateMockPathResolver();
+            CreateMockKeyGenerator();
+            CreateMockIncludeConfigurationByKeyRule();
+            CreateFileProvider();
+        }
+
+        private void CreateMockConfigurationProvider()
+        {
             var moqConfigurationProvider = new Mock<IConfigurationProvider>();
             provider = moqConfigurationProvider.Object;
+        }
 
-            // setup the path resolver
+        private void CreateMockPathResolver()
+        {
             var moqPathResolver = new Mock<IPathResolver>();
             moqPathResolver
                 .Setup(resolver => resolver.ResolvePath(It.IsAny<string>()))
@@ -37,25 +49,29 @@ namespace BootstrapConfig.Tests.Unit
                     Path.GetFullPath(
                         Path.Combine(this.CurrentDirectory.FullName, s)));
             pathResolver = moqPathResolver.Object;
+        }
 
+        private void CreateMockKeyGenerator()
+        {
             // setup the key generator
             var moqKeyGenerator = new Mock<IKeyGenerator>();
             int index = 0;
             moqKeyGenerator
-                .Setup(resolver=> resolver.Generate())
-                .Returns(()=>(index++).ToString());
+                .Setup(resolver => resolver.Generate())
+                .Returns(() => (index++).ToString());
             keyGenerator = moqKeyGenerator.Object;
+        }
 
-            // setup the boostrap config rule
+        private void CreateMockIncludeConfigurationByKeyRule()
+        {
             var moqIsBootstrapConfigRule = new Mock<IIncludeConfigurationRule>();
             moqIsBootstrapConfigRule.Setup(resolver => resolver.Execute(It.IsAny<DirectorySearcherArgs>()))
-                .Returns<DirectorySearcherArgs>((ds) => 
+                .Returns<DirectorySearcherArgs>((ds) =>
                 {
                     return ds.ConfigurationSection is IBootstrapConfiguration;
                 });
             isBootstrapConfigRule = moqIsBootstrapConfigRule.Object;
 
-            // setup the boostrap config has key rule
             var moqBoostrapConfigHasKeyRule = new Mock<IIncludeConfigurationRule>();
             moqIsBootstrapConfigRule.Setup(resolver => resolver.Execute(It.IsAny<DirectorySearcherArgs>()))
                 .Returns<DirectorySearcherArgs>((ds) =>
@@ -66,16 +82,25 @@ namespace BootstrapConfig.Tests.Unit
             boostrapConfigHasKeyRule = moqBoostrapConfigHasKeyRule.Object;
         }
 
+        private void CreateFileProvider()
+        {
+            var moqFileProvider = new Mock<IFileSystemProvider>();
+            moqFileProvider
+                .Setup(x => x.EnumerateFiles(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>()))
+                .Returns<IEnumerable<FileInfo>>(v => new string[]{});
+        }
+
         [TestMethod]
         public void Test_DirectorySearcher_Loads_Nested_Files()
         {
-            IDirectorySearcher directorySearcher = new DefaultDirectorySearcher(
+            IDirectorySearcher directorySearcher = new DirectorySearcher(
                 provider,
+                pathResolver,
+                keyGenerator,
+                fileProvider,
                 Path.Combine(this.CurrentDirectory.FullName, Paths.App_Config.HasNestedFiles.Path),
                 "*.config",
-                true,                
-                pathResolver,
-                keyGenerator);
+                true);
             var configurationDictionary = directorySearcher.GetConfigurationDictionary();
             Assert.AreEqual(2, configurationDictionary.Keys.Count);
         }
@@ -83,13 +108,14 @@ namespace BootstrapConfig.Tests.Unit
         [TestMethod]
         public void Test_DirectorySearcher_Loads_Only_Files_With_Configuration_And_Key()
         {
-            IDirectorySearcher directorySearcher = new DefaultDirectorySearcher(
+            IDirectorySearcher directorySearcher = new DirectorySearcher(
                 provider,
-                Path.Combine(this.CurrentDirectory.FullName, Paths.App_Config.HasOneFile.Path),
-                "*.config",
-                false,
                 pathResolver,
-                keyGenerator);
+                keyGenerator,
+                fileProvider,
+                Path.Combine(this.CurrentDirectory.FullName, Paths.App_Config.HasNestedFiles.Path),
+                "*.config",
+                true);
             var configurationDictionary = directorySearcher.GetConfigurationDictionary();
             Assert.AreEqual(1, configurationDictionary.Keys.Count);
         }

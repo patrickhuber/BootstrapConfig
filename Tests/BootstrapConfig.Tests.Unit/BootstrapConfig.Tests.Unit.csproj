@@ -60,26 +60,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="App_Config\HasNestedFiles\top-level.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\HasNestedFiles\Nested\nested.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\HasOneFile\NoSectionNoKey.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\HasOneFile\HasSectionAndKey.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="App_Config\HasOneFile\HasSectionNoKey.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <Content Include="App_Config\HasTransforms\ConfigTransforms.config" />
-    <Content Include="App_Config\HasTransforms\ConfigTransforms.Debug.Config">
-    </Content>
-    <Content Include="App_Config\HasTransforms\ConfigTransforms.Release.Config" />
-    <None Include="App_Config\HasWcf\Wcf.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
