@@ -7,6 +7,7 @@ using System.IO;
 using Moq;
 using BootstrapConfig.Tests.Templates;
 using BootstrapConfig.Abstractions;
+using BootstrapConfig.IO;
 
 namespace BootstrapConfig.Tests.Unit
 {
@@ -86,7 +87,8 @@ namespace BootstrapConfig.Tests.Unit
         {
             var moqFileProvider = new Mock<IFileSystemProvider>();
             moqFileProvider
-                .Setup(x => x.EnumerateFiles(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>()))
+                .Setup(x => x.EnumerateFiles(
+                    It.IsAny<SearchParameters>()))
                 .Returns<IEnumerable<FileInfo>>(v => new string[]{});
         }
 

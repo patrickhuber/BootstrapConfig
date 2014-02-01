@@ -6,6 +6,7 @@ using System.IO;
 using System.Configuration;
 using System.Diagnostics;
 using BootstrapConfig.Abstractions;
+using BootstrapConfig.IO;
 
 namespace BootstrapConfig
 {
@@ -115,11 +116,13 @@ namespace BootstrapConfig
             // resolve the path using the built in path resolver
             string rootPath = this.PathResolver.ResolvePath(this.Path);
 
-            // enumerators are a bit faster on startup and the same on processing time.
-            var files = FileProvider.EnumerateFiles(
-                rootPath,
-                this.SearchPattern,
-                this.Recursive);
+            var searchParameters = new SearchParameters
+                {
+                    Path = rootPath,
+                    Pattern = this.SearchPattern,
+                    Recursive = this.Recursive
+                };
+            var files = FileProvider.EnumerateFiles(searchParameters);
 
             IDictionary<string, IConfiguration> configurationDictionary = new Dictionary<string, IConfiguration>();
             

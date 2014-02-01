@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DirectorySearcherTests.cs" />
+    <Compile Include="IO\CrawlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadOnlyDictionaryTests.cs" />
     <Compile Include="RootBootstrapConfigurationBuilderTests.cs" />

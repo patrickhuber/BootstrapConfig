@@ -4,17 +4,17 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace BootstrapConfig
+namespace BootstrapConfig.IO
 {
     public class FileSystemProvider : IFileSystemProvider
     {
-        public IEnumerable<string> EnumerateFiles(string path, string pattern, bool recursive)
-        {           
+        public IEnumerable<string> EnumerateFiles(SearchParameters searchParameters)
+        {
             return Directory.EnumerateFiles(
-                path,
-                pattern, 
-                recursive 
-                    ? SearchOption.AllDirectories 
+                searchParameters.Path,
+                searchParameters.Pattern,
+                searchParameters.Recursive
+                    ? SearchOption.AllDirectories
                     : SearchOption.TopDirectoryOnly);
         }
     }
