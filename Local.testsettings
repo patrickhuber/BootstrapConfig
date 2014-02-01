@@ -2,10 +2,10 @@
 <TestSettings name="Local" id="e8e9e6d4-7dcd-4b82-bb73-5985261da002" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
   <Description>These are default test settings for a local test run.</Description>
   <Deployment>
+    <DeploymentItem filename="Tests\BootstrapConfig.Tests.Unit\App_Config\" outputDirectory="App_Config\" />
     <DeploymentItem filename="Tests\BootstrapConfig.Tests.Unit\App.config" />
-    <DeploymentItem filename="Tests\BootstrapConfig.Tests.Unit\App_Config\" outputDirectory="App_Config\"/>
-    <DeploymentItem filename="Tests\BootstrapConfig.Tests.Integration\App.config"  />
-    <DeploymentItem filename="Tests\BootstrapConfig.Tests.Integration\App_Config\" outputDirectory="App_Config\"  />
+    <DeploymentItem filename="Tests\BootstrapConfig.Tests.Integration\App_Config\"  outputDirectory="App_Config\" />
+    <DeploymentItem filename="Tests\BootstrapConfig.Tests.Integration\App.config" />
   </Deployment>
   <Execution>
     <TestTypeSpecific>
